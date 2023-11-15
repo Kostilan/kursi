@@ -34,7 +34,7 @@
 					<tbody>
 						@foreach ($applications as $item)
 						<tr>
-							<th score="row{{$item->id}}"></th>
+							<th scope="row{{$item->id}}"></th>
 							<td>{{$item->email}}</td>
 							<td>{{$item->name}}</td>
 							<td>{{$item->course_id}}</td>

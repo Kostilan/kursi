@@ -10,11 +10,11 @@ class CourseController extends Controller
 {
     public function index()
     {
-        $courses = Course::all();
+        $courses = Course::paginate(3);
         // dd($courses);
-        return view("index", [
-            "all_courses"=>$courses
-        ]);
+        return view("index", 
+        compact("courses")
+    );
     }
 
     public function create_course(Request $request)
@@ -24,7 +24,7 @@ class CourseController extends Controller
             "description" => "required",
             "cost" => "required|numeric",
             "duration" => "required|numeric",
-            "category_id" => "required",
+            "category" => "required",
         ], [
             "title.required"=>"Поле обязательного заполнения",
             "description.required"=>"Поле обязательного заполнения",
@@ -40,7 +40,7 @@ class CourseController extends Controller
         ]);
 
         $course_info = $request->all();
-
+// dd($course_info);
         Course::create([
             "title"=> $course_info["title"],
             "description"=> $course_info["description"],
@@ -69,7 +69,7 @@ class CourseController extends Controller
         $category_info = $request->all();
 
         Category::create([
-            "title-course"=> $category_info["title"],
+            "title"=> $category_info["title-course"],
         ]);
 
         return redirect("/admin");

@@ -75,7 +75,7 @@
 			<div class="container">
 				<h2 class="m-3"> Наши курсы</h2>
 				<div class="d-flex              ">
-					@foreach ($all_courses as $item)
+					@foreach ($courses as $item)
 					<div class="card" style="width: 18rem;">
 						<img src="/images/{{$item->image}}" class="card-img-top" alt="...">
 						<div class="card-body">
@@ -87,7 +87,10 @@
 					</div>
 					@endforeach
 				</div>
-			</div>
+			</div> 
+			<br>
+			<div class="container w-50">	{{ $courses->withQueryString()->links('pagination::bootstrap-5') }}</div>
+		
 		</section>
 
 		<section id="enroll">
@@ -116,7 +119,7 @@
 					<div class="m-3">
 						<label for="name" class="form-label">Выберете курс</label>
 						<select class="form-select" name="course">
-							@foreach($all_courses as $item)
+							@foreach($courses as $item)
 							<option value="{{$item->id}}">{{$item->title}}</option>
 							@endforeach
 						</select>
