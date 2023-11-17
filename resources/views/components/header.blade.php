@@ -17,6 +17,14 @@
 							<a class="nav-link active" aria-current="page" href="/login">Вход</a>
 						</li>
 						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="/signout">Выход</a>
+						</li>
+						<li class="nav-item">
+							@auth
+								{(Auth::user()->name)}
+							@endauth
+						</li>
+						<li class="nav-item">
 							<a class="nav-link" href="#">Курсы</a>
 						</li>
 						<li class="nav-item">

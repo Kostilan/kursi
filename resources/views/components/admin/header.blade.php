@@ -16,6 +16,14 @@
 						<li class="nav-item">
 							<a class="nav-link" href="#">Записаться</a>
 						</li>
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="/signout">Выход</a>
+						</li>
+						<li class="nav-item">
+							@auth
+								{{Auth::user()->name}}
+							@endauth
+						</li>
 							<li class="nav-item">
 							<a class="nav-link" href="admin/create-course.blade.php">Панель администратора</a>
 						</li>

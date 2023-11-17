@@ -8,13 +8,14 @@ use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [CourseController::class, "index"]);
-
+// Авторизация
 Route::get('/login', [UserController::class, "signin"]);
-Route::get('/signin', [CourseController::class, "signin_valid"]);
+Route::post('/signin', [UserController::class, "signin_valid"]);
 Route::get('/signout', [UserController::class, "signout"]);
 
 Route::get('/account', [UserController::class, "account"]);
 
+// Регистрация
 Route::get('/registration', [UserController::class, "signinup"]);
 Route::post('/signup', [UserController::class, "signup_valid"]);
 

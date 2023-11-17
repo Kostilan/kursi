@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Role;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 
@@ -22,30 +23,43 @@ class UserController extends Controller
     }
     public function signout()
     {
-        
+        Auth::logout();
+        return redirect("/");
     }
-public function signin_valid()
+public function signin_valid(Request $request)
     {
-        
+        $request->validate([
+            'email' =>'required|email',
+            'password' =>'required|min:1',
+        ]);
+
+        $credentials = $request->only("email", "password");
+        Auth::attempt($credentials);
+
+        return redirect ("/admin");
     }
 
     public function signup_valid(Request $request)
     {
+        
         $request->validate([
             "email"=> "required|email|unique:users",
             "name"=> "required",
             "password"=> "required",
-            "confrim_pass"=> "required|same:pass",
+            "password_confirmation"=> "required|same:password",
         ]);
+
         $user = $request->all();
 
-        User::create([
-            "email"=>$user["email"],
-            "name"=>$user["name"],
-            "password"=>Hash::make($user["pass"]),
+            User::create([
+                "email"=>$user["email"],
+                "name"=>$user["name"],
+                "password"=>Hash::make($user["password"]),
+                "role_id"=>"1"  
 
-        ]);
-        dd($user);
+            ]);
+            Auth::login($user);
+        return redirect ("/")->with("success",  "");
     }
 
     
