@@ -71,6 +71,15 @@
 			</div>
 		</section>
 
+		<section class="container">
+		<ul class="list-group">
+			<li class="list-group-item fw-bold">Категории</li>
+			@foreach($categories as $category)
+			<a href="category_open/{{$category->id}}"><li class="list-group-item fw-bold">{{$category->title}}</li></a>
+			@endforeach
+		  </ul>
+		  </section>
+
 		<section id="courses">
 			<div class="container">
 				<h2 class="m-3"> Наши курсы</h2>

@@ -28,14 +28,13 @@ class UserController extends Controller
     }
 public function signin_valid(Request $request)
     {
+        // dd($credentials);
         $request->validate([
             'email' =>'required|email',
             'password' =>'required|min:1',
         ]);
-
         $credentials = $request->only("email", "password");
         Auth::attempt($credentials);
-
         return redirect ("/admin");
     }
 

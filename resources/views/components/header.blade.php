@@ -10,19 +10,21 @@
 						<li class="nav-item">
 							<a class="nav-link active" aria-current="page" href="#">О нас</a>
 						</li>
+						@guest
 						<li class="nav-item">
 							<a class="nav-link active" aria-current="page" href="/registration">Регистраиця</a>
 						</li>
+						
 						<li class="nav-item">
 							<a class="nav-link active" aria-current="page" href="/login">Вход</a>
 						</li>
+						@endguest
+						@auth
 						<li class="nav-item">
 							<a class="nav-link active" aria-current="page" href="/signout">Выход</a>
 						</li>
 						<li class="nav-item">
-							@auth
 								{(Auth::user()->name)}
-							@endauth
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="#">Курсы</a>
@@ -30,6 +32,7 @@
 						<li class="nav-item">
 							<a class="nav-link" href="#">Записаться</a>
 						</li>
+						@endauth
 					</ul>
 				</div>
 			</div>

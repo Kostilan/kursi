@@ -11,11 +11,21 @@ class CourseController extends Controller
     public function index()
     {
         $courses = Course::paginate(3);
+        $categories = Category::all();
         // dd($courses);
         return view("index", 
-        compact("courses")
+        compact("courses", "categories")
     );
     }
+    public function category_open($id)
+    {
+        $category = Category::findOrFail($id);
+        $courses = Course::where('category_id', $category->id)->paginate(3);
+        return view("category_open", 
+        compact("courses", "category")
+    );
+    }
+
 
     public function create_course(Request $request)
     {
@@ -61,9 +71,6 @@ class CourseController extends Controller
         ], [
             "title-course.required"=>"Поле обязательного заполнения",
             "title-course.max"=>"Имя должно содержать максимум 50 символов",
-
-
-              
         ]);
 
         $category_info = $request->all();
@@ -75,19 +82,4 @@ class CourseController extends Controller
         return redirect("/admin");
     }
 }
-
-
-
-
-
-
-
-
-
-// регистраиця, авторизация, личный кабинет представления
-//  регитрация - форма для почта, пароль, подтверждение пароля, имя
-//  авторизация - форма для пароль и почта
-// информация о пользователе выводится, есть кнопочки для редактирования, при редактировании  с возможностями редактирования и выводидтся окошечка с информацией пользователя
-// юзер конртоллер,  2 формы для авторизации и регистрации , 2 формы для валидации, праивла для валидации  как сейм - проверка на схожесть 2 полей пароля
-// функционал не делаем
               

@@ -7,7 +7,11 @@ use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
+
 Route::get('/', [CourseController::class, "index"]);
+Route::get('/category_open/{id}', [CourseController::class, "category_open"]);
+
+
 // Авторизация
 Route::get('/login', [UserController::class, "signin"]);
 Route::post('/signin', [UserController::class, "signin_valid"]);
@@ -21,9 +25,10 @@ Route::post('/signup', [UserController::class, "signup_valid"]);
 
 Route::post("/enroll",[ApplicationController::class, "create_application"]);
 
+// админа страницы
 Route::get("/admin",[AdminController::class,"index"]);
-Route::post("/cours",[CourseController::class,"create_course"]);
-Route::post("/category",[CourseController::class,"create_categories"]);
+Route::post("/cours_create",[CourseController::class,"create_course"]);
+Route::post("/category_create",[CourseController::class,"create_categories"]);
 
 
 Route::get("/application/{id_application}/confirm",[ApplicationController::class,"confirm"]);
