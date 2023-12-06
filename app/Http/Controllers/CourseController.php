@@ -19,8 +19,9 @@ class CourseController extends Controller
     }
     public function category_open($id)
     {
-        $category = Category::findOrFail($id);
-        $courses = Course::where('category_id', $category->id)->paginate(3);
+        $category = Category::findOrFail($id); //идет вызов категории по ид
+        $courses = $category->course()->paginate(3); // Вызываю курсы по ид категории, обращаясь к методу модели
+        //  Category где по названию данного метода идет отношение категорий с курсами
         return view("category_open", 
         compact("courses", "category")
     );
